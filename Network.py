@@ -2,7 +2,6 @@ from Neuron import *
 from SignalType import *
 from NeuronType import *
 import pandas as pd
-import streamlit
 import numpy as np
 
 
@@ -72,25 +71,6 @@ def run_sim(runTime):
     # plt.show()
 
 
-
-if __name__ == "__main__":
-
-    streamlit.title("Oscillating Circuit Simulation.", anchor=None)
-    streamlit.text("The circuit is modeled using a graph. Each node in the graph represents a neuron.\nVisualization of the graph is shown below. The plot is the voltage potential of the\noutput neurons.")
-    streamlit.text("Enter the number of milliseconds to run the simulation for (Ex. 4): ")
-
-    user_input = streamlit.text_input("", 0)
-    first, second = run_sim(int(user_input))
-
-    first_np = np.array(first)
-    second_np = np.array(second)
-    
-    
-    chart_data = pd.DataFrame(np.column_stack((first_np, second_np)), columns=['Output Neuron One', 'Output Neuron Two'])
-
-
-
-    streamlit.line_chart(chart_data)
 
 
 
