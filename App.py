@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from Network import *
-from CircuitGraph import *
 import streamlit
 from pyvis import network as net
 from stvis import pv_static
@@ -53,4 +52,3 @@ if __name__ == "__main__":
 
     streamlit.line_chart(chart_data, width=700, height=450)
 
-    
