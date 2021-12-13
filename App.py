@@ -42,7 +42,7 @@ if __name__ == "__main__":
     displayText2 = "Add the number of milliseconds to run the simulator. When the simulation is complete,\nthe voltage spike trains of each output neuron will be shown below."
     streamlit.text(displayText2)
 
-    user_input = st.number_input("", min_value=4, max_value=100, value=4)
+    user_input = streamlit.number_input("", min_value=4, max_value=100, value=4)
     first, second = run_sim(user_input)
 
     first_np = np.array(first)
