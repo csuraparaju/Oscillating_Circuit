@@ -46,17 +46,46 @@ class Neuron():
             
 
     def simulateChargeTransfer(self, signal):
+
+    #     # Values for I is calculated from the average resistance of a
+    #     # neuron and the resting potential. 
+    #     # I = V/R, where V = -0.04 and R = 0.15 ohm
+    #     # Source: https://www.sciencedirect.com/science/article/pii/B9780123972651001337
+    #     # Value for C is 9.E-7 Farads. From: https://www.sciencedirect.com/science/article/pii/S000634950076293X
         
-        dt = 0.1 #time step in ms
+    #     Vrest = -0.04
+    #     R = 0.15
+    #     Irest = Vrest/R
+    #     C = 9.E-7
+    #     dt = 0.01
+    #     Vthresh = 0.07
+        
+    #     # Calculate the voltage potential of the neuron
+    #     if(signal == SignalType.POSITIVE):
+    #         for i in range(0, self.runtime, ):
+    #             if(self.voltagePotentialHistory[i] < Vthresh):
+    #                 Vcurr = self.voltagePotentialHistory[i]
+    #                 self.voltagePotentialHistory.append(Vcurr + dt*(Irest - Vcurr)/C)
+    #             else:
+    #                 break
+    #     else:
+    #         for i in range(0, self.runtime):
+    #             if(self.voltagePotentialHistory[i] > Vthresh):
+    #                 Vcurr = self.voltagePotentialHistory[i]
+    #                 self.voltagePotentialHistory.append(Vcurr - dt*(Irest - Vcurr)/C)
+    #             else:
+    #                 break
+
+        dt = 0.2 #time step in ms
         counter = 0
 
         if signal == SignalType.POSITIVE:
-            while counter < self.runtime:
+            while counter < self.runtime*0.99:
                 self.voltagePotentialHistory.append(self.potentialChargeModel(counter))
                 counter += dt
         else:
-           while counter < self.runtime:
-                self.voltagePotentialHistory.append(self.potentialChargeModel(-40))
+           while counter < self.runtime*0.99:
+                self.voltagePotentialHistory.append(-0.04) #-0.04 is the resting potential
                 counter += dt
     
     def potentialChargeModel(self, t):

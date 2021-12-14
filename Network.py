@@ -43,32 +43,13 @@ def run_sim(runTime):
         excTop.sendSynapseSignal(SignalType.POSITIVE)
 
     
-    
-    # time = [i for i in range(0,len(outBot.voltagePotentialHistory))]
-    # time = [i/1000 for i in time]
+    time = [i/1000 for i in range(0,len(outBot.voltagePotentialHistory))]
+    topNrn = [i*1000 for i in outTop.voltagePotentialHistory[:len(outBot.voltagePotentialHistory)]]
+    bottomNrn = [i*1000 for i in outBot.voltagePotentialHistory]
 
-    topNrn = outTop.voltagePotentialHistory[:len(outBot.voltagePotentialHistory)]  # y axis
-    bottomNrn = outBot.voltagePotentialHistory  # z axis
+    return time, topNrn, bottomNrn
 
-    return topNrn, bottomNrn
 
-    # #Plot the results
-    # time = [i for i in range(0, len(outBot.voltagePotentialHistory))]  # x axis
-    # time = [i/1000 for i in time]  # x axis in milliseconds
-    # topNrn = outTop.voltagePotentialHistory[:len(outBot.voltagePotentialHistory)]  # y axis
-    # bottomNrn = outBot.voltagePotentialHistory  # z axis
-
-    # ax = plt.gca()
-    # ax.set_ylim([-0.045, 0.08])
-    
-    # plt.title("Membrane Potentials of Output Neurons in an Oscillating Circuit")
-    # plt.xlabel(xlabel="Time (ms)")
-    # plt.ylabel(ylabel="Membrane Potential (mV)")
-    # plt.plot(time, topNrn, color="red", label="Top Output Neuron")
-    # plt.plot(time, bottomNrn, color="blue", label="Bottom Output Neuron")
-    
-    
-    # plt.show()
 
 
 
