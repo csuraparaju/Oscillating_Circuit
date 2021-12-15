@@ -15,26 +15,38 @@ if __name__ == "__main__":
 
         streamlit.title("Neural Oscillator Circuit Simulation", anchor=None)
 
-        IntroMsgOne = """This is a simple simulation of an oscillating circuit in the brain. Mostly prominant 
-         in the neuromotor system, oscillating circuits help the body move around. For example, when the neurons 
-         responsible for moving the right leg are turned on, neurons responsible for moving the left leg
-         will turn off, and vice versa.
+        streamlit.markdown("***")
+
+
+        streamlit.subheader("Introduction to Neural Circuits")
+
+        
+        IntroMsgOne = """
+         The brain is a computer. Granted, it can do complicated things that traditional computers can't do like think,
+         feel, or learn. But at the end of the day, it is a computer. And much like traditional computers, it functions 
+         using circuits. There are many different types of circuits in the brain, ranging from ones with a 
+         few neuron to ones that span across the entire organ. To learn more about these mysterious
+         computer like circuits in the brain, we will build simulations and try to understand what's really going
+         on. Let's start with a simple oscillator in the brain. Most prominant 
+         in the neuromotor system, these circuits help the body with coordination. For example, when walking, the 
+         brain needs to ensure that the right half of the body is not moving when the left half is and vice versa.
         """
 
         IntroMsgTwo = """ 
-        Essentially, the input neurons give a continuous activating signal to the two excitatory neurons, 
-        which are types of neurons that feed forward the positive signal to others when they are told to turn on.
-        The excitatory neurons are connected to their respective output neurons as well as two inhibitory neurons.
-        Unlike excitatory neurons, inhibitory neurons feed forward a negative signal when they are told to turn on.
-        In short, excitatory neurons turn on other neurons and inhibitory neurons turn off other neurons when activated.
-        Due to this nature, the inhibitory neurons in the circuit act as clocks. When one of the excitatory neurons is
-        activated, the other excitatory neuron is signaled to turn off. Explore the figure below to see how the connections
-        of each neuron give rise to an oscillating nature. 
+        This simulation builds a small model of this oscillating circuit in python using a Graph data structure. Basically, different nodes
+        of the Graph represent different neurons, and the edges between these nodes represent the neuron synapses. 
+        Two input neurons give continuous activating signals to two excitatory neurons, which turn 
+        on other neurons when activated.
+        Along with their respective output neurons, the excitatory neurons are connected to two inhibitory neurons as well.
+        Unlike excitatory neurons, inhibitory neurons send a negative signal when they are told to turn on.
+        This means that the output of this circuit can be seen as an oscillating pattern. Explore the figure below to see how exactly the connections
+        of each neuron give rise to this nature. 
         
         """
 
         streamlit.write(IntroMsgOne)
         streamlit.write(IntroMsgTwo)
+
 
         graph = net.Network(height='500px', width='700px', bgcolor='#222222', font_color='white')
         graph.add_node("Input 1", label="Input 1", color='#698B22') 
@@ -60,28 +72,32 @@ if __name__ == "__main__":
 
         pv_static(graph)    
 
+        streamlit.markdown("***")
+
+
+        streamlit.subheader("Modeling the circuit")
+
         huxleyMsg = r'''
         
-        In this simulation, I decided to represent the firing of the neuron by plotting its voltage potential. 
-        Voltage potential is the amount of electrical energy that a neuron is holding in its membrane at any given time. 
+        One of the best ways to visualize the activity of a neuron is to examine its voltage potential,
+        which is the amount of electrical energy that a neuron is holding in its membrane. 
         When a neuron fires, its voltage potential increases until it reaches a threshold, at which point it decreases
-        back to its resting potential. For this model, I decided to model the current flowing through the neuron as a 
+        back to its resting potential. For this simulation, I decided to model the current flowing through the neuron as a 
         function of its potential, mainly using the Hodgkin-Huxley equations: 
-        $I_m(t)=C_m\frac{dV_m}{dt}+\frac{V_m(t)}{R_m}$, where $C_m$ is the membrane capacitance of the neuron, $V_m$ is 
-        the potential voltage across the membrane and
-        $R_m$ is the resistance of the membrane.
+        $I_m(t)=C_m\frac{dV_m(t)}{dt}$, where $C_m$ is the membrane capacitance of the neuron, $dV_m(t)$ is 
+        the differential change in potential across the membrane, and $I_m$ is the current flowing through the neuron.
+        In order to get the voltage potentials, we need to solve the above equation for $V_m(t)$. 
         '''
 
         streamlit.write(huxleyMsg)
 
         integrateMsg = r'''
 
-        In order to obtain voltage potential values, I needed to solve this differential equation.
-        If we re-arrange the equation, we can see that: $\int{I_m(t)-\frac{V_m(t)}{R_m}}dt = V(t)$.
-        Because this is a simulation, I decided to solve this integral by summing discrete 
+        If we re-arrange the above equation, we can see that: $\int{\frac{I_m(t)}{C_m}}dt = V_m(t)$.
+        Because computers can't deal with infinite summations, I decided to solve this integral by summing discrete 
         values of time. I arbitrarily chose a time step, $dt$, of 0.1 seconds. 
-        So in order to obtain the voltage potential values, I summed the values of $I(t)$ for each time step:
-        $V(t) = \sum{I(t)-\frac{V_m(t)}{R_m}}*dt$.
+        So in order to obtain the voltage potential values, I summed outputs of $I_m(t)$ for each time step:
+        $V_m(t) = \sum_{i=0}^{n}{I_m(i) \cdot dt}$.
 
         
         '''
@@ -89,15 +105,21 @@ if __name__ == "__main__":
         streamlit.write(integrateMsg)
 
         # GraphComponent.drawGraph()
-    
+
+
+        streamlit.markdown("***")
+
+        streamlit.subheader("Run the Simulation")
         simOptionMsg = r'''
-        In order to view the results of this simulation, eneter the number of iterations you want the 
-        neurons to fire for and hit enter. The data will be graphed on the plot below, with the y-axis 
-        representing the voltage potential of the neuron in ($mV$). On the x-axis is the time 
-        of simulation in ($ms$). Notice that it takes about 18 ($ms$) for a neuron to fire. 
-        This is the industry established value for neuron firing. The line represented in
-        orange is the activity of one output neuron, while the line represented in blue is the 
+        In order to view the results of this simulation, enter the number of iterations you want the 
+        network to run for in the box below. The data will be graphed on the plot, with the y-axis 
+        representing the voltage potential of the neuron in $mV$, and x-axis representing the time 
+        of simulation in $ms$. Notice that it takes about 18 $ms$ for a neuron to fully fire in 
+        this simulation. 
+        This is how long it takes for an average real life neuron to fire. The line represented in
+        orange is the activity of one of the output neuron, while the line represented in blue is the 
         activity of the other. Notice that when one fires, the other does not and vice versa. 
+        This is the oscillating pattern that we wanted to simulate.
         
         '''
         streamlit.write(simOptionMsg)
@@ -124,7 +146,7 @@ if __name__ == "__main__":
 
 
 
-        chart_data = pd.DataFrame(np.column_stack((nrn1_np, nrn2_np)), columns=['Output Neuron One', 'Output Neuron Two'])
+        chart_data = pd.DataFrame(np.column_stack((nrn1_np, nrn2_np)), columns=['Output 1', 'Output 2'])
 
         streamlit.line_chart(chart_data, width=700, height=450)
 
