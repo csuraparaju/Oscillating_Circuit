@@ -13,7 +13,8 @@ if __name__ == "__main__":
 
     with mainContainer: 
 
-        streamlit.title("Neural Oscillator Circuit Simulation", anchor=None)
+        streamlit.title("Neural Circuit Simulations", anchor=None)
+        streamlit.markdown("Demos by Krish Suraparaju of various circuits found in the brain")
 
         streamlit.markdown("***")
 
