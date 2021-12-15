@@ -16,9 +16,9 @@ if __name__ == "__main__":
         streamlit.title("Neural Oscillator Circuit Simulation", anchor=None)
 
         IntroMsgOne = """This is a simple simulation of an oscillating circuit in the brain. Mostly prominant 
-         in the neuromotor system, oscillating circuits help the body walk. For example, when the neurons 
+         in the neuromotor system, oscillating circuits help the body move around. For example, when the neurons 
          responsible for moving the right leg are turned on, neurons responsible for moving the left leg
-         will turn off, and vice versa/  
+         will turn off, and vice versa.
         """
 
         IntroMsgTwo = """ 
