@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-from Network import *
+import altair as alt
+from Oscillating_Network import *
 import streamlit 
 from stvis import pv_static
 from pyvis import network as net
-
 
 
 if __name__ == "__main__":
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         streamlit.write(IntroMsgTwo)
 
 
-        graph = net.Network(height='500px', width='700px', bgcolor='#222222', font_color='white')
+        graph = net.Network(height='500px', width='700px', bgcolor='#222222', font_color='white',directed =True)
         graph.add_node("Input 1", label="Input 1", color='#698B22') 
         graph.add_node("Excitatory 1", label="Excitatory 1", color='#93CAED')
         graph.add_node("Output 1", label="Output 1", color='#698B22')
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         graph.add_edge("Inhibitory 2", "Excitatory 1", color='#FFFFFF')
         graph.add_edge("Inhibitory 1", "Excitatory 2", color='#FFFFFF')
         graph.add_edge("Inhibitory 1", "Inhibitory 1", color='#FFFFFF')
-        graph.add_edge("Input 2", "Excitatory 2", color='#FFFFFF')
+        graph.add_edge("Input 2", "Excitatory 2", color='#FFFFFF',)
         graph.add_edge("Excitatory 2", "Output 2", color='#FFFFFF')
         graph.add_edge("Excitatory 2", "Inhibitory 2", color='#FFFFFF')
 
@@ -126,12 +126,12 @@ if __name__ == "__main__":
         streamlit.write(simOptionMsg)
 
         user_input = streamlit.number_input("", min_value=1, max_value=100, value=1)
-        time, first, second = run_sim(user_input)
+        
 
         nrn1_base = [-39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0]
         nrn2_base = [-40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893]
-        
-        
+
+        #Generate the voltage potentials for each neuron
         if(user_input == 1):
             nrn1_np = np.array(nrn1_base)
             nrn2_np = np.array(nrn2_base)
@@ -141,13 +141,18 @@ if __name__ == "__main__":
             for i in range(0, user_input):
                 nrn1+=nrn1_base
                 nrn2+=nrn2_base
-            
+
             nrn1_np = np.array(nrn1)
             nrn2_np = np.array(nrn2)
 
+        streamlit.markdown("#### Membrane Potentials of Two Oscillating Neurons (in $mV$) Plotted Against Time (in $ms$)")
 
-
+        #Plot the data
+        chart_df = pd.DataFrame(data={"Neuron 1": nrn1_np.tolist(), "Neuron 2": nrn2_np.tolist()})
         chart_data = pd.DataFrame(np.column_stack((nrn1_np, nrn2_np)), columns=['Output 1', 'Output 2'])
 
         streamlit.line_chart(chart_data, width=700, height=450)
+
+
+
 
