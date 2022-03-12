@@ -2,6 +2,8 @@ import streamlit
 from PIL import Image
 
 
+
+
 def app():
     streamlit.title("Modelling Neural Circuits in the Human Brain")
     streamlit.markdown("#### An independent study project by [Krish Suraparaju](https://krishsuraparaju.me/) with guidance from [Dr. Elizabeth Ryder](https://www.wpi.edu/people/faculty/ryder)")

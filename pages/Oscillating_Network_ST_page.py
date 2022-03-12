@@ -8,6 +8,8 @@ from pyvis import network as net
 
 
 def app():
+    
+
     mainContainer = streamlit.container()
 
     with mainContainer: 

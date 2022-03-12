@@ -1,4 +1,8 @@
 import streamlit as st
+st.set_page_config(
+        page_title="Neural Sims - Krish Suraparaju", 
+        page_icon=":brain:"
+    )
 
 # Custom imports 
 from Multipage import MultiPage
@@ -6,6 +10,7 @@ from pages import Oscillating_Network_ST_page, Simple_Learning_Network_ST_Page, 
 
 # Create an instance of the app 
 app = MultiPage()
+ 
 
 # Title of the main page
 
