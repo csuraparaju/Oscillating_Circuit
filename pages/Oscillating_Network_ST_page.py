@@ -90,7 +90,7 @@ def app():
         Because computers can't deal with infinite summations, I decided to solve this integral by summing discrete 
         values of time. I arbitrarily chose a time step, $dt$, of 0.1 seconds. 
         So in order to obtain the voltage potential values, I summed outputs of $I_m(t)$ for each time step:
-        $V_m(t) = \sum_{i=0}^{n}{I_m(i) \cdot dt}$.
+        $V_m(t) = \sum_{i=0}^{n}{\frac{I_m(i)}{C_m} \cdot dt}$.
 
         
         '''
