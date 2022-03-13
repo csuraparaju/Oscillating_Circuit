@@ -18,7 +18,7 @@ def app():
         streamlit.markdown("***")
 
 
-        streamlit.subheader("Introduction to Neural Circuits")
+        streamlit.subheader("Circuit Description")
 
         
         IntroMsgOne = """
