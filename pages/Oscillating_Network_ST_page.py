@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import altair as alt
-from Oscillating_Network import *
+from Oscillating_Circuit import Oscillating_Network as o_n
 import streamlit 
 from stvis import pv_static
 from pyvis import network as net
@@ -14,15 +14,15 @@ def app():
 
     with mainContainer: 
 
-        streamlit.title("Neural Circuit Simulations", anchor=None)
+        streamlit.title("Oscillating Circuit Simulation", anchor=None)
         streamlit.markdown("***")
 
 
-        streamlit.subheader("Introduction to Oscillating Circuits")
+        streamlit.subheader("Introduction to Neural Circuits")
 
         
         IntroMsgOne = """
-         Let's start our modelling journey with a simple oscillator in the brain. Most prominant 
+         Combining basic building blocks like the converging circuit and the reverberating circuit, let's start our modelling journey with a simple oscillator in the brain. Most prominant 
          in the neuromotor system, these circuits help the body with coordination. For example, when walking, the 
          brain needs to ensure that the right half of the body is not moving when the left half is and vice versa.
         """
@@ -44,6 +44,7 @@ def app():
 
 
         graph = net.Network(height='500px', width='700px', bgcolor='#222222', font_color='white',directed =True)
+        graph.toggle_physics(False)
         graph.add_node("Input 1", label="Input 1", color='#698B22') 
         graph.add_node("Excitatory 1", label="Excitatory 1", color='#93CAED')
         graph.add_node("Output 1", label="Output 1", color='#698B22')
@@ -121,9 +122,10 @@ def app():
 
         user_input = streamlit.number_input("", min_value=1, max_value=100, value=1)
         
+        nrn1_base, nrn2_base = o_n.run_sim(user_input)
 
-        nrn1_base = [-39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0]
-        nrn2_base = [-40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893]
+        # nrn1_base = [-39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0]
+        # nrn2_base = [-40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -40.0, -39.95669640552794, -39.78765004501495, -39.13022405432472, -37.02429684470145, -31.496478551237022, -19.702852360771175, 0.4667385288586595, 27.388903360285745, 53.73581678628326, 68.90548171240849, 65.68683830675556, 45.66808613785454, 18.00216664473536, -7.1982992627124265, -24.505573698685073, -33.88661661273688, -37.98527972223925, -39.445406371434, -39.872484790870494, -39.97551071573893]
 
         #Generate the voltage potentials for each neuron
         if(user_input == 1):

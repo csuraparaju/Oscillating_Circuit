@@ -24,6 +24,14 @@ def app():
     with col3:
         streamlit.write("")
 
-    streamlit.write("The brain is a computer. Granted, it can do complicated things that traditional computers can't do like think, feel, or learn. But at the end of the day, it is a computer. And much like traditional computers, it functions using circuits. There are many different types of circuits in the brain, ranging from ones with a few neuron to ones that span across the entire organ. To learn more about these mysterious computer like circuits in the brain, we will build simulations and try to understand what's really going on.")
+    msg2 = """
+    Explore the simulations by clicking on the different pages showcased on the 
+    left navigation bar. Currently, I've simulated an oscillating circuit and am working on 
+    building a simple learning circuit. In brief, an oscillating circuit is used to express 
+    harmonic firings of two neurons (one fires when the other doesn't and vice versa), while 
+    a learning circuit consists of neurons strengething or weakening their connections 
+    to others, based on feedback they receive from their inputs. 
+    """
+    streamlit.write(msg2)
 
 

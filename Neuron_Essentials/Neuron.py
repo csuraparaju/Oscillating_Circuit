@@ -1,5 +1,4 @@
-from NeuronType import *
-from SignalType import *
+from Neuron_Essentials import Neuron, SignalType, NeuronType
 import math
 
 class Neuron():
