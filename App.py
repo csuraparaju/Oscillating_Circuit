@@ -17,7 +17,7 @@ app = MultiPage()
 # Add all your applications (pages) here
 app.add_page("Home Page", Home_Page.app)
 app.add_page("Diverging/Converging Circuits", Diverging_Circuit_page.app)
-app.add_page("Reverbating Circuit", Reverbating_Circuit_Page.app)
+app.add_page("Reverberating Circuit", Reverbating_Circuit_Page.app)
 app.add_page("Oscillating Circuit (Small Population)", Oscillating_Network_ST_page.app)
 app.add_page("Simple Learning Circuit (Large Populatio)",Simple_Learning_Network_ST_Page.app)
 
