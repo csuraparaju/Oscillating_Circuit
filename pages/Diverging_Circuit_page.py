@@ -19,8 +19,8 @@ def app():
         computers can't do like think, feel, or learn. But at the end of the day, it is 
         a computer. And much like traditional computers, it functions using circuits. There 
         are many different types of circuits in the brain, ranging from ones with a few neuron 
-        to ones that span across the entire organ. To learn more about these mysterious computer 
-        like circuits in the brain, we will build simulations and try to understand what's really going on. 
+        to ones that span across an entire organ. To learn more about these mysterious computer 
+        like circuits in the brain, we will build simulations and to learn what's really going on. 
         """
 
         st.write(msg1)
@@ -33,7 +33,7 @@ def app():
         In brief, it is a circuit consisting of one input neuron that 
         activates thousands, if not millions, of other neurons. For example, a diverging circuit of 
         sensory neurons is often observed to stimulate various parts of the brain, all with one input neuron.
-        A singular visual images would need respond to a wide variety of outputs such as the 
+        A singular visual images would need response from a wide variety of outputs such as the 
         amount of light to open or close the pupil, or to interpret words, or identify the emotions behind a 
         facial expression; a diverging circuit would thus send the same signal to multiple locations in the brain.
         """
@@ -41,7 +41,7 @@ def app():
         st.write (msg2)
 
         msg3 = """  
-        Below is a diagramtic graph representation of how such a circuit would look like in the brain. Notice that
+        Below is a diagrammatic graph representation of how such a circuit would look like in the brain. Notice that
         a singular input neuron activates many other neurons, layer by layer.
 
         """
