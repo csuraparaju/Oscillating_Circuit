@@ -59,21 +59,21 @@ class Neuron():
     #     dt = 0.01
     #     Vthresh = 0.07
         
-    #     # Calculate the voltage potential of the neuron
-    #     if(signal == SignalType.POSITIVE):
-    #         for i in range(0, self.runtime, ):
-    #             if(self.voltagePotentialHistory[i] < Vthresh):
-    #                 Vcurr = self.voltagePotentialHistory[i]
-    #                 self.voltagePotentialHistory.append(Vcurr + dt*(Irest - Vcurr)/C)
-    #             else:
-    #                 break
-    #     else:
-    #         for i in range(0, self.runtime):
-    #             if(self.voltagePotentialHistory[i] > Vthresh):
-    #                 Vcurr = self.voltagePotentialHistory[i]
-    #                 self.voltagePotentialHistory.append(Vcurr - dt*(Irest - Vcurr)/C)
-    #             else:
-    #                 break
+        # Calculate the voltage potential of the neuron
+        if(signal == SignalType.POSITIVE):
+            for i in range(0, self.runtime, ):
+                if(self.voltagePotentialHistory[i] < Vthresh):
+                    Vcurr = self.voltagePotentialHistory[i]
+                    self.voltagePotentialHistory.append(Vcurr + dt*(Irest - Vcurr)/C)
+                else:
+                    break
+        else:
+            for i in range(0, self.runtime):
+                if(self.voltagePotentialHistory[i] > Vthresh):
+                    Vcurr = self.voltagePotentialHistory[i]
+                    self.voltagePotentialHistory.append(Vcurr - dt*(Irest - Vcurr)/C)
+                else:
+                    break
 
         dt = 0.2 #time step in ms
         counter = 0

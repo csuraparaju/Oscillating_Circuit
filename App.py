@@ -19,7 +19,7 @@ app.add_page("Home Page", Home_Page.app)
 app.add_page("Diverging/Converging Circuits", Diverging_Circuit_page.app)
 app.add_page("Reverberating Circuit", Reverbating_Circuit_Page.app)
 app.add_page("Oscillating Circuit (Small Population)", Oscillating_Network_ST_page.app)
-app.add_page("Simple Learning Circuit (Large Populatio)",Simple_Learning_Network_ST_Page.app)
+app.add_page("Simple Learning Circuit (Large Population)",Simple_Learning_Network_ST_Page.app)
 
 hide_streamlit_style = """
             <style>
